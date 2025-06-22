@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './global.css';
 import { View, Text, StyleSheet } from 'react-native';
 import { Appbar, Menu, Provider } from 'react-native-paper';
 import { theme } from './src/theme';
@@ -35,8 +36,10 @@ const App = () => {
         </Appbar.Header>
 
         {/* Content */}
-        <View style={styles.container}>
-          <Text style={styles.text}>Welcome</Text>
+        <View className="flex-1 items-center justify-center bg-white">
+          <Text className="text-xl font-bold text-blue-500">
+            Hello NativeWind!
+          </Text>
         </View>
       </Provider>
     </>
