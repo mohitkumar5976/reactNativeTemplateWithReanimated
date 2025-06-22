@@ -1,27 +1,58 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Appbar, Menu, Provider } from 'react-native-paper';
+import { theme } from './src/theme';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+const App = () => {
+  const [visible, setVisible] = React.useState(false);
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <>
+      <Provider theme={theme}>
+        {/* Header */}
+        <Appbar.Header>
+          <Appbar.Content title="My Header" />
+          <View style={{ position: 'relative' }}>
+            <Menu
+              visible={visible}
+              onDismiss={closeMenu}
+              anchor={
+                <Appbar.Action
+                  icon="dots-vertical"
+                  color="black"
+                  onPress={openMenu}
+                />
+              }
+            >
+              <Menu.Item onPress={() => {}} title="Option 1" />
+              <Menu.Item onPress={() => {}} title="Option 2" />
+              <Menu.Item onPress={() => {}} title="Option 3" />
+            </Menu>
+          </View>
+        </Appbar.Header>
+
+        {/* Content */}
+        <View style={styles.container}>
+          <Text style={styles.text}>Welcome</Text>
+        </View>
+      </Provider>
+    </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  text: {
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 
